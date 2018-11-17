@@ -45,11 +45,9 @@ Features
  - auto detect Arduino board, with common USB chip (*ask for new one*)
  - verify/compile/upload code
  - serial console
- - create your own documentation and make it easy to use for pupills
- - embed Blockly@rduino : just update folder 'BlocklyArduino_AIO\B@electron\www' to have last version
+ - embed Blockly@rduino : just update folder 'BlocklyArduino_AIO\www' to have last version
  - launch in background the supervision server : PyMata-aio (https://github.com/MrYsLab/pymata-aio) to communicate with Arduino card and test I/O
  - upload FirmataPlus sketch to make it usable with supervision
- - show script DOS windows to debug
 
 What you have to do
 -------------------
