@@ -1,4 +1,5 @@
 const { exec } = require('child_process')
+const execPymata = require('child_process').exec
 const fs = require('fs-extra')
 const { ipcRenderer } = require("electron")
 
@@ -81,15 +82,25 @@ document.getElementById('serialport_sup').addEventListener('mouseover', function
 }, false)
 
 window.addEventListener('load', function load(event) {
-	var $selects=$('#serialport_sup, #serialport_ide').change(function(){
-		$selects.not(this).val( $(this).val() );
-	})
+	// var $selects=$('#serialport_sup, #serialport_ide').change(function(){
+		// $selects.not(this).val( $(this).val() );
+	// })
 	// document.getElementById('serialport_sup').onchange = function(event) {
 		// $('#serialport').val() = $('#serialport_sup').val()
 	// }
 	// document.getElementById('serialport').onchange = function(event) {
 		// $('#serialport_sup').val() = $('#serialport').val()
 	// }
+	document.getElementById('btn_saveConfigGlobale_id').onclick = function(event) {
+		var fileSettings = "./Blockly@rduino.json"
+		var Settings = window.location.search
+		fs.writeFileSync(fileSettings, JSON.stringify(window.location.search), (err) => {
+			if(err){
+				console.log("An error ocurred creating the file "+ err.message)
+			}                    
+			console.log("The file has been succesfully saved")
+		})
+	}
 	document.getElementById('btn_flash_pymata').onclick = function(event) {
 		$('#message').modal('show');
 		var com = document.getElementById('serialport_sup').value
@@ -103,12 +114,12 @@ window.addEventListener('load', function load(event) {
 				var upload_arg = profile.defaultBoard['upload_arg']
 				var carte = document.getElementById('board_select').value
 				if (carte ==  'arduino_leonardo' || carte ==  'arduino_mega' || carte ==  'arduino_micro' || carte ==  'arduino_yun')
-						var file_path = '..\\FirmataPlus-32u4'
+						var file_path = '..\\resources\\FirmataPlus-32u4'
 					else
-						var file_path = '..\\FirmataPlus'
+						var file_path = '..\\resources\\FirmataPlus'
 		}
 		var cmd = 'arduino-cli.exe upload -p ' + com + ' --fqbn ' + upload_arg + ' ' + file_path
-		document.getElementById('messageDIV').textContent += 'Téléversement : en cours...\n'
+		document.getElementById('messageDIV').textContent += '\n\nTéléversement : en cours...\n\n'
 		exec(cmd , {cwd: './arduino'} , (error, stdout, stderr) => {
 			if (error) {
 				document.getElementById('messageDIV').style.color = '#ff0000'
@@ -117,7 +128,7 @@ window.addEventListener('load', function load(event) {
 			}
 			document.getElementById('messageDIV').style.color = '#00ff00'
 			document.getElementById('messageDIV').textContent += stdout
-			document.getElementById('messageDIV').textContent += '\nTéléversement du microprogramme : OK'
+			document.getElementById('messageDIV').textContent += '\n\nTéléversement du microprogramme : OK'
 		})
 	}
 	document.getElementById('toggle-pymata').onclick = function(event) {
@@ -133,15 +144,9 @@ window.addEventListener('load', function load(event) {
 		}
 		var cmd = 'python.exe .\\Lib\\site-packages\\pymata_aio\\pymata_iot.py -l 5 -c no_client -comport ' + com
 		document.getElementById('messageDIV').textContent = 'Serveur : en cours...\n'
-		exec(cmd , {cwd: './resources/python'} , (error, stdout, stderr) => {
+		var PyMataChild = execPymata(cmd, {cwd: './resources/python', windowsHide: false} , (error, stdout, stderr) => {
 			document.getElementById('messageDIV').style.color = '#000000'
-			document.getElementById('messageDIV').textContent = stdout
-				// fs.writeFileSync("error-log2.json", stdout, (err) => {
-					// if(err){
-						// console.log("An error ocurred creating the file "+ err.message)
-					// }                    
-					// console.log("The file has been succesfully saved")
-				// })
+			document.getElementById('messageDIV').textContent += stdout
 			if (error) {
 				document.getElementById('messageDIV').style.color = '#ff0000'
 				document.getElementById('messageDIV').textContent = stderr
@@ -222,7 +227,7 @@ window.addEventListener('load', function load(event) {
 				var cmd = 'arduino-cli.exe --debug upload -p ' + com + ' --fqbn ' + upload_arg + ' ' + file_path
 			else
 				var cmd = 'arduino-cli.exe upload -p ' + com + ' --fqbn ' + upload_arg + ' ' + file_path
-		document.getElementById('local_debug').textContent = 'Téléversement : en cours...\n'
+		document.getElementById('local_debug').textContent = '\nTéléversement : en cours...\n'
 		exec(cmd , {cwd: './arduino'} , (error, stdout, stderr) => {
 			if (error) {
 				document.getElementById('local_debug').style.color = '#ff0000'

@@ -46,9 +46,10 @@ function createWindow () {
 		width: 292,
 		height: 218,
 		backgroundColor: '#000000',
+		setTitle: "Blockly@rduino...",
 		frame: false
 	})
-	splash.loadURL(path.join(__dirname, './splash_screen.png'))
+	splash.loadURL(path.join(__dirname, './Blockly@rduino.png'))
 	mainWindow = new BrowserWindow({
 		width:1280,
 		height:800,
@@ -77,7 +78,7 @@ function createWindow () {
 		mainWindow.loadURL(path.join(__dirname, "../../www/index_AIO.html" + Settings))
 	}
 	mainWindow.setMenu(null);
-	mainWindow.webContents.openDevTools();
+	// mainWindow.webContents.openDevTools();
 	mainWindow.once('ready-to-show', () => {
 		mainWindow.show()
 		splash.close();

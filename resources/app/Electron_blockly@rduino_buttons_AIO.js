@@ -2,6 +2,8 @@ const { exec } = require('child_process')
 const execPymata = require('child_process').exec
 const fs = require('fs-extra')
 const { ipcRenderer } = require("electron")
+// const WebSocketServer = require("ws").Server
+// var socket = new WebSocketServer({ port: 9000 })
 
 /* fake IDE code Arduino
 ** load: serial port list
@@ -119,7 +121,7 @@ window.addEventListener('load', function load(event) {
 						var file_path = '..\\resources\\FirmataPlus'
 		}
 		var cmd = 'arduino-cli.exe upload -p ' + com + ' --fqbn ' + upload_arg + ' ' + file_path
-		document.getElementById('messageDIV').textContent += 'Téléversement : en cours...\n'
+		document.getElementById('messageDIV').textContent += '\n\nTéléversement : en cours...\n\n'
 		exec(cmd , {cwd: './arduino'} , (error, stdout, stderr) => {
 			if (error) {
 				document.getElementById('messageDIV').style.color = '#ff0000'
@@ -128,7 +130,7 @@ window.addEventListener('load', function load(event) {
 			}
 			document.getElementById('messageDIV').style.color = '#00ff00'
 			document.getElementById('messageDIV').textContent += stdout
-			document.getElementById('messageDIV').textContent += '\nTéléversement du microprogramme : OK'
+			document.getElementById('messageDIV').textContent += '\n\nTéléversement du microprogramme : OK'
 		})
 	}
 	document.getElementById('toggle-pymata').onclick = function(event) {
@@ -143,12 +145,8 @@ window.addEventListener('load', function load(event) {
 				document.getElementById('messageDIV').textContent = 'Carte ' + profile.defaultBoard['description'] + ' sur port ' + com
 		}
 		var cmd = 'python.exe .\\Lib\\site-packages\\pymata_aio\\pymata_iot.py -l 5 -c no_client -comport ' + com
-		// const child = require('child_process').spawn(cmd, { env: { PYTHON_PATH: './resources/python' }, });
-		// python.stdout.on('data',function(data){
-			// console.log("data: ",data.toString('utf8'));
-		// });
 		document.getElementById('messageDIV').textContent = 'Serveur : en cours...\n'
-		const PyMataChild = execPymata(cmd, {cwd: './resources/python', windowsHide: false} , (error, stdout, stderr) => {
+		execPymata(cmd, {cwd: './resources/python', windowsHide: true} , (error, stdout, stderr) => {
 			document.getElementById('messageDIV').style.color = '#000000'
 			document.getElementById('messageDIV').textContent += stdout
 			if (error) {
@@ -159,6 +157,11 @@ window.addEventListener('load', function load(event) {
 			document.getElementById('messageDIV').style.color = '#00ff00'
 			document.getElementById('messageDIV').textContent += '\nServeur : OK'
 		})
+		// var socket = new WebSocketServer({ port: 9000 })
+		// socket.on('connection', (socket) =>{
+			// document.getElementById('sup_debug').style.color = '#00ff00'
+			// document.getElementById('sup_debug').textContent += '\nServeur : OK'
+		// })
 	}
 	document.getElementById('btn_term').onclick = function(event) {
 		var com = document.getElementById('serialport_ide').value
@@ -231,7 +234,7 @@ window.addEventListener('load', function load(event) {
 				var cmd = 'arduino-cli.exe --debug upload -p ' + com + ' --fqbn ' + upload_arg + ' ' + file_path
 			else
 				var cmd = 'arduino-cli.exe upload -p ' + com + ' --fqbn ' + upload_arg + ' ' + file_path
-		document.getElementById('local_debug').textContent = 'Téléversement : en cours...\n'
+		document.getElementById('local_debug').textContent = '\nTéléversement : en cours...\n'
 		exec(cmd , {cwd: './arduino'} , (error, stdout, stderr) => {
 			if (error) {
 				document.getElementById('local_debug').style.color = '#ff0000'
