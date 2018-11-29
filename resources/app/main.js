@@ -78,7 +78,7 @@ function createWindow () {
 		mainWindow.loadURL(path.join(__dirname, "../../www/index_AIO.html" + Settings))
 	}
 	mainWindow.setMenu(null);
-	// mainWindow.webContents.openDevTools();
+	mainWindow.webContents.openDevTools();
 	mainWindow.once('ready-to-show', () => {
 		mainWindow.show()
 		splash.close();

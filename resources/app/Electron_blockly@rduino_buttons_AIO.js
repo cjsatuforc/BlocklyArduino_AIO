@@ -121,7 +121,7 @@ window.addEventListener('load', function load(event) {
 						var file_path = '..\\resources\\FirmataPlus'
 		}
 		var cmd = 'arduino-cli.exe upload -p ' + com + ' --fqbn ' + upload_arg + ' ' + file_path
-		document.getElementById('messageDIV').textContent += '\n\nTéléversement : en cours...\n\n'
+		document.getElementById('messageDIV').textContent += '\n\nTéléversement : en cours...\n'
 		exec(cmd , {cwd: './arduino'} , (error, stdout, stderr) => {
 			if (error) {
 				document.getElementById('messageDIV').style.color = '#ff0000'
@@ -130,7 +130,7 @@ window.addEventListener('load', function load(event) {
 			}
 			document.getElementById('messageDIV').style.color = '#00ff00'
 			document.getElementById('messageDIV').textContent += stdout
-			document.getElementById('messageDIV').textContent += '\n\nTéléversement du microprogramme : OK'
+			document.getElementById('messageDIV').textContent += '\nTéléversement du microprogramme : OK'
 		})
 	}
 	document.getElementById('toggle-pymata').onclick = function(event) {
