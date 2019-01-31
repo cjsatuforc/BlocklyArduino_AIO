@@ -14,7 +14,7 @@ window.addEventListener('load', function load(event) {
 	document.getElementById('btn_saveConfigGlobale').onclick = function(event) {
 		var fileSettings = "./Blockly@rduino.json"
 		var Settings = window.location.search
-		fs.writeFileSync(fileSettings, JSON.stringify(window.location.search), (err) => {
+		fs.writeFileSync(fileSettings, JSON.stringify(Settings, 'w'), (err) => {
 			if(err){
 				console.log("An error ocurred creating the file "+ err.message)
 			}                    
