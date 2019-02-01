@@ -73,29 +73,29 @@
 			</Aide1>
 					<PrparerArduino1 type="TMenuItem">
 					  <Caption>
-						<FR>&1. Préparer la carte Arduino</FR>
-						<EN>&1. prepare Arduino card</EN>
-						<ES>&1. Preparar la tarjeta Arduino</ES>
+						<FR>&1. Dossiers/menus/pilotes</FR>
+						<EN>&1. Folders/menus/drivers</EN>
+						<ES>&1. Carpetas/menús/drivers</ES>
 					  </Caption>
 					</PrparerArduino1>
 					<Utilisation1 type="TMenuItem">
 					  <Caption>
-						<FR>&2. Utilisation des scripts</FR>
-						<EN>&2. how to use webserver</EN>
-						<ES>&2. Utilizacion de scripts</ES>
+						<FR>&2. Supervision</FR>
+						<EN>&2. Supervision</EN>
+						<ES>&2. Supervision</ES>
 					  </Caption>
 					</Utilisation1>
 					<N4Principesdeprogrammation1 type="TMenuItem">
 					  <Caption>
-						<FR>&3. Principes de programmation</FR>
-						<EN>&3. the best way to code</EN>
-						<ES>&3. Principios de programacion</ES>
+						<FR>&3. Interface et programmation</FR>
+						<EN>&3. Interface and programmation</EN>
+						<ES>&3. Interfaz y programacion</ES>
 					  </Caption>
 					</N4Principesdeprogrammation1>
 					<N3Mmentodescommandes1 type="TMenuItem">
 					  <Caption>
 						<FR>&4. Mémento des commandes</FR>
-						<EN>&4. webserver command summary</EN>
+						<EN>&4. Command summary</EN>
 						<ES>&4. Aviso de ordenes</ES>
 					  </Caption>
 					</N3Mmentodescommandes1>
